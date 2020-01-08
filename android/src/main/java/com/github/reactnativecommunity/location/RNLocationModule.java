@@ -41,9 +41,6 @@ public class RNLocationModule extends ReactContextBaseJavaModule {
                 case "auto":
                     locationProvider = createDefaultLocationProvider();
                     break;
-                case "playServices":
-                    locationProvider = createPlayServicesLocationProvider();
-                    break;
                 case "standard":
                     locationProvider = createStandardLocationProvider();
                     break;
@@ -95,16 +92,9 @@ public class RNLocationModule extends ReactContextBaseJavaModule {
 
     private RNLocationProvider createDefaultLocationProvider() {
         // If we have the correct classes for the fused location provider, we default to that. Otherwise, we default to the built-in methods
-        if (Utils.hasFusedLocationProvider()) {
-            return createPlayServicesLocationProvider();
-        } else {
-            return createStandardLocationProvider();
-        }
+        return createStandardLocationProvider();
     }
 
-    private RNPlayServicesLocationProvider createPlayServicesLocationProvider() {
-        return new RNPlayServicesLocationProvider(getCurrentActivity(), getReactApplicationContext());
-    }
 
     private RNStandardLocationProvider createStandardLocationProvider() {
         return new RNStandardLocationProvider(getReactApplicationContext());
