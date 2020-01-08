@@ -2,7 +2,8 @@ package com.github.reactnativecommunity.location;
 
 import android.location.Location;
 import android.os.Build;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -49,7 +50,9 @@ public class Utils {
             map.putDouble("speedAccuracy", 0.0);
         }
         map.putDouble("timestamp", location.getTime());
-        map.putBoolean("fromMockProvider", location.isFromMockProvider());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            map.putBoolean("fromMockProvider", location.isFromMockProvider());
+        }
 
         return map;
     }
